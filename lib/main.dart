@@ -3,10 +3,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:login_ap/app/componets/login/view/login.dart';
 import 'package:provider/provider.dart';
 
-import 'app/componets/home/view/home_page.dart';
 import 'app/componets/home/viewmodel/home_viewmodel.dart';
+import 'app/componets/login/view_model/login_viewmodel.dart';
 import 'app/componets/sign_up/model/model.dart';
-import 'app/componets/sign_up/view/sign_up.dart';
 import 'app/componets/sign_up/view_model/sign_up_provider.dart';
 
 Future<void> main() async {
@@ -33,6 +32,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: ((_) => HomePageView()),
         ),
+        ChangeNotifierProvider(
+          create: ((_) => loginViewModel()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blueGrey,
         ),
-        home: HomePage(),
+        home: const LoginPage(),
       ),
     );
   }

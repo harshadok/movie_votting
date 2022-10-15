@@ -1,48 +1,44 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:login_ap/app/componets/home/model/model.dart';
-import 'package:login_ap/app/componets/home/services/api.dart';
+import 'package:login_ap/app/componets/home/model/model_post.dart';
+
+import '../services/api_services.dart';
 
 class HomePageView extends ChangeNotifier {
-  bool isLoading = false;
+  bool? isLoading;
+
+  List<Result> list = [];
 
   HomePageView() {
     inInit();
+    notifyListeners();
   }
   inInit() async {
     isLoading = true;
     notifyListeners();
-    apiCall();
+    await getData();
     isLoading = false;
     notifyListeners();
   }
 
-  List<QueryParam> posts = [];
+  Future<void> getData() async {
+    final ModelRsponce data = ModelRsponce(
+      category: "movies",
+      language: "kannada",
+      genre: "all",
+      sort: "voting",
+    );
 
-  Future<Person?> apiCall() async {
-    Person? data;
-    try {
-      Response response = await DioServices.postMethod(
-          url: DioServices.baseUrl, value: data!.toJson());
+    Person? personresponce = await HomeApiService().apiCall(data);
 
-      if (response.statusCode == 200) {
-        Person newData = Person.fromJson(response.data);
-        response.data.forEach(
-          (element) {
-            posts.add(QueryParam.fromJson(element));
-          },
-        );
-        return newData;
-      }
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 401) {
-        return Person.fromJson(e.response!.data);
-      }
-    } catch (e) {
-      log("SignUp error message : $e");
+    if (personresponce != null) {
+      //print(personresponce.message);
+      list.clear();
+      list.addAll(personresponce.result);
+      // print(list.length);
+      notifyListeners();
     }
-    return null;
+
+    notifyListeners();
   }
 }

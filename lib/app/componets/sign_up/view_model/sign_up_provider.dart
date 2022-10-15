@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:login_ap/app/componets/home/view/home_page.dart';
 import 'package:login_ap/app/componets/sign_up/model/model.dart';
 
 class SignUpProvider extends ChangeNotifier {
@@ -9,20 +10,45 @@ class SignUpProvider extends ChangeNotifier {
   final email = TextEditingController();
   final phonenumber = TextEditingController();
 
-  Future<void> adDetails() async {
+  Future<void> adDetails(context) async {
     final name = nameController.text.trim();
     final pass = password.text.trim();
     final emai = email.text.trim();
     final phone = phonenumber.text.trim();
 
-    final person = Model(
-      name: name,
-      pass: pass,
-      email: emai,
-      phone: phone,
-    );
+    if (name.isEmpty || pass.isEmpty || emai.isEmpty || phone.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close))
+              ],
+              title: const Text(
+                "Fill The Full Details",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              ),
+            );
+          });
+    } else {
+      final person = Model(
+        name: name,
+        pass: pass,
+        email: emai,
+        phone: phone,
+      );
 
-    addStudent(person);
+      addStudent(person);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.amber[300],
+          content: const Text("Registration Completed")));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (ctx) => const HomePage()));
+    }
   }
 
   Future<void> addStudent(Model value) async {

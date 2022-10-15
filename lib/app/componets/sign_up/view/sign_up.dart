@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:login_ap/app/componets/home/view/home_page.dart';
 import 'package:login_ap/app/componets/sign_up/view_model/sign_up_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -8,16 +7,16 @@ class SignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double hight = MediaQuery.of(context).size.height;
     final authProvider = context.watch<SignUpProvider>();
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
                 height: hight * 0.2,
                 child: const Text(
                   "Login",
@@ -38,7 +37,7 @@ class SignUp extends StatelessWidget {
                 decoration: InputDecoration(
                     hintText: "Your Name",
                     prefixIcon: const Icon(
-                      Icons.password,
+                      Icons.person,
                       color: Colors.orange,
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -69,7 +68,7 @@ class SignUp extends StatelessWidget {
                 decoration: InputDecoration(
                     hintText: "Your Phone",
                     prefixIcon: const Icon(
-                      Icons.password,
+                      Icons.phone,
                       color: Colors.orange,
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -149,14 +148,31 @@ class SignUp extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: () {
-                  authProvider.adDetails();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.amber[300],
-                      content: const Text("Registration Completed")));
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (ctx) => const HomePage()));
+                  authProvider.adDetails(context);
                 },
                 child: const Text("Sign Up")),
+            GestureDetector(
+              onTap: (() {
+                Navigator.pop(context);
+              }),
+              child: RichText(
+                text: const TextSpan(
+                    text: "Already have an account?",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Login",
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ]),
+              ),
+            )
           ],
         ),
       )),

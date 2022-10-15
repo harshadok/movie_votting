@@ -1,25 +1,3 @@
-// class ClassModel {
-//   ClassModel({
-//     required this.status,
-//     required this.data,
-//   });
-
-//   bool? status;
-//   List<QueryParam> data;
-
-//   factory ClassModel.fromJson(Map<String, dynamic> json) => ClassModel(
-//         status: json["status"],
-//         data: json['data'] == null
-//             ? []
-//             : List<QueryParam>.from(
-//                 json["data"].map((x) => QueryParam.fromJson(x))),
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "status": status,
-//         "data": List<dynamic>.from(data.map((x) => x.toJson())),
-//       };
-// }
 class Person {
   Person({
     required this.result,
@@ -70,10 +48,10 @@ class QueryParam {
       );
 
   Map<String, dynamic> toJson() => {
-        "category": "movies",
-        "language": "kannada",
-        "genre": "all",
-        "sort": "voting",
+        "category": category,
+        "language": language,
+        "genre": genre,
+        "sort": sort,
       };
 }
 

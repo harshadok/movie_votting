@@ -1,15 +1,5 @@
-// To parse this JSON data, do
-//
-//     final person = personFromJson(jsonString);
-
-import 'dart:convert';
-
-Person personFromJson(String str) => Person.fromJson(json.decode(str));
-
-String personToJson(Person data) => json.encode(data.toJson());
-
-class Person {
-  Person({
+class ModelRsponce {
+  ModelRsponce({
     required this.category,
     required this.language,
     required this.genre,
@@ -21,7 +11,7 @@ class Person {
   String genre;
   String sort;
 
-  factory Person.fromJson(Map<String, dynamic> json) => Person(
+  factory ModelRsponce.fromJson(Map<String, dynamic> json) => ModelRsponce(
         category: json["category"],
         language: json["language"],
         genre: json["genre"],
