@@ -68,6 +68,7 @@ class Result {
     required this.pageViews,
     required this.totalVoted,
     required this.voting,
+    this.countVote,
   });
 
   String id;
@@ -85,6 +86,7 @@ class Result {
 
   int totalVoted;
   int voting;
+  int? countVote;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["_id"],

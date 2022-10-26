@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     final homePageViewModel = context.watch<HomePageView>();
 
     return Scaffold(
-        drawer: SideDrawer(),
+        drawer: const SideDrawer(),
         appBar: AppBar(),
         body: SafeArea(
             child: homePageViewModel.isLoading!
@@ -34,9 +34,23 @@ class HomePage extends StatelessWidget {
                                   width: width * 0.1,
                                   child: Column(
                                     children: [
-                                      const Icon(Icons.arrow_drop_up),
-                                      Text(listItem.totalVoted.toString()),
-                                      const Icon(Icons.arrow_drop_down),
+                                      GestureDetector(
+                                          onTap: () {
+                                            homePageViewModel.vottingCount(
+                                                listItem, index);
+                                          },
+                                          child:
+                                              const Icon(Icons.arrow_drop_up)),
+                                      Text(listItem.countVote == null
+                                          ? "0"
+                                          : listItem.countVote.toString()),
+                                      GestureDetector(
+                                          onTap: () {
+                                            homePageViewModel.vottingCountdwon(
+                                                listItem, index);
+                                          },
+                                          child: const Icon(
+                                              Icons.arrow_drop_down)),
                                       const Text("Votes")
                                     ],
                                   ),

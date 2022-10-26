@@ -6,7 +6,6 @@ import '../services/api_services.dart';
 
 class HomePageView extends ChangeNotifier {
   bool? isLoading;
-
   List<Result> list = [];
 
   HomePageView() {
@@ -38,6 +37,24 @@ class HomePageView extends ChangeNotifier {
       // print(list.length);
       notifyListeners();
     }
+
+    notifyListeners();
+  }
+
+  vottingCount(Result result, int index) {
+    if (list[index].countVote == null) {
+      list[index].countVote = 0;
+    }
+    list[index].countVote = list[index].countVote! + 1;
+
+    notifyListeners();
+  }
+
+  vottingCountdwon(Result result, int index) {
+    if (list[index].countVote == null) {
+      list[index].countVote = 0;
+    }
+    list[index].countVote = list[index].countVote! - 1;
 
     notifyListeners();
   }

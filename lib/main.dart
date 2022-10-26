@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: ((_) => HomePageView()),
         ),
         ChangeNotifierProvider(
-          create: ((_) => loginViewModel()),
+          create: ((_) => LoginViewModel()),
         ),
       ],
       child: MaterialApp(

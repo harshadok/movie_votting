@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<loginViewModel>();
+    final authProvider = context.watch<LoginViewModel>();
     return Scaffold(
       body: SafeArea(
           child: Column(
@@ -92,7 +92,6 @@ class LoginPage extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    // backgroundColor: primaryColor,
                     elevation: 3,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
@@ -101,13 +100,10 @@ class LoginPage extends StatelessWidget {
                     authProvider.checkLogin(context);
                   }),
                   child: const Text("Sign Up",
-                      style: TextStyle(
-                          //  fontFamily:
-                          //  commontextStyle.fontFamily,
-                          color: Colors.white))),
+                      style: TextStyle(color: Colors.white))),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(

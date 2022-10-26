@@ -61,11 +61,4 @@ class SignUpProvider extends ChangeNotifier {
     notifyListeners();
     //print(personList.length);
   }
-
-  Future<void> getStudent() async {
-    final studentDb = await Hive.openBox<Model>('student_db');
-    personList.clear();
-    personList.addAll(studentDb.values);
-    notifyListeners();
-  }
 }

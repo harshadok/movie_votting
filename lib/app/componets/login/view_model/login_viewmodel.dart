@@ -3,14 +3,13 @@ import 'package:login_ap/app/componets/home/view/home_page.dart';
 
 import '../../sign_up/model/model.dart';
 
-class loginViewModel extends ChangeNotifier {
+class LoginViewModel extends ChangeNotifier {
   final nameController = TextEditingController();
   final password = TextEditingController();
 
   Model? model;
   checkLogin(context) {
-    if (nameController.text == model?.name &&
-        password.text == model?.pass) {
+    if (nameController.text == model?.name && password.text == model?.pass) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.amber[300],
           content: const Text("Registration Completed")));
